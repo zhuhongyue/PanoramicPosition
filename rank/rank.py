@@ -1,10 +1,12 @@
 import cv2
+import matplotlib as mpl
+mpl.use('Agg')
 from matplotlib import pyplot as plt
 import numpy as np
 import os
 import math
-
-
+import scipy.misc
+import pdb
 def getMatchNum(matches,ratio):
     matchesMask=[[0,0] for i in range(len(matches))]
     matchNum=0
@@ -13,10 +15,9 @@ def getMatchNum(matches,ratio):
             matchesMask[i]=[1,0]
             matchNum+=1
     return (matchNum,matchesMask)
-
 path='./'
 queryPath=path+'query_image/' 
-samplePath=path+'origin_1.jpg'
+samplePath=path+'6987.jpg'
 comparisonImageList=[] 
 sift = cv2.xfeatures2d.SIFT_create() 
 FLANN_INDEX_KDTREE=0
@@ -42,11 +43,7 @@ for parent,dirnames,filenames in os.walk(queryPath):
         comparisonImageList.append((comparisonImage,matchRatio)) 
 
 comparisonImageList.sort(key=lambda x:x[1],reverse=True) 
-count=len(comparisonImageList)
-column=4
-row=math.ceil(count/column)
-figure,ax=plt.subplots(row,column)
 for index,(image,ratio) in enumerate(comparisonImageList):
-    ax[int(index/column)][index%column].set_title('Similiarity %.2f%%' % ratio)
-    ax[int(index/column)][index%column].imshow(image)
-plt.show()
+        print index
+        print ratio
+        scipy.misc.imsave('{}.jpg'.format(index), image)
