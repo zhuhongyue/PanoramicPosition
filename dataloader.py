@@ -55,8 +55,8 @@ class trainset(Dataset):
         return len(self.images)
 
 if __name__ == "__main__":
-    img_set, loc = readData('/home/zjfan/SIFT_solution/dataset/train_data/scene1_jiading_lib_training/scene1_jiading_lib_training_coordinates.csv',0)
-    troch_trainset = trainset('/home/zjfan/SIFT_solution/dataset/train_data/scene1_jiading_lib_training/scene1_jiading_lib_training_coordinates.csv')
+    img_set, loc = readData('/home/zjfan/SmartCityCompaign/dataset/train_data/scene1_jiading_lib_training/scene1_jiading_lib_training_coordinates.csv',0)
+    troch_trainset = trainset('/home/zjfan/SmartCityCompaign/dataset/train_data/scene1_jiading_lib_training/scene1_jiading_lib_training_coordinates.csv')
     #load image from certain path
     for i in img_set:
         print i
