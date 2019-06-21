@@ -67,13 +67,16 @@ if __name__ == "__main__":
     #load image from certain path
     #for i in img_set:
     #    print i
-    trainloader = DataLoader(troch_trainset, batch_size=1,shuffle=True)#do not test other batchsize
+    trainloader = DataLoader(troch_trainset, batch_size=1,shuffle=False)#do not test other batchsize
     #example for loading data
     for image_feat, img, location, fn in trainloader:
+        for (img_instance,fn_instance) in zip(img,fn):
+            print img_instance[0]
+            print fn_instance
         print "image len", len(image_feat[0]) #一个坐标对应6张图像
         print "image shape:", image_feat[0][0].shape#每张图的张量维度
         print "location shape:", location[0].shape #坐标的维度
-        print "image 0 file:", fn[0]  #所在文件夹  
+        print "image 0 file:", fn[0]  #第一张图像的文件路径  
         print "origin img shape",img[0].shape #具体图像的尺寸
         imge_transform = transforms.ToPILImage()(img[0][0])#读出具体图像
         imge_transform.save("test_reconstruct.jpg")#重建后的图像
